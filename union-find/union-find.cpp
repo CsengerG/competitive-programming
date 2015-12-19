@@ -3,7 +3,7 @@
 
 #define ll long long
 #define FOR(i,n) for(int i=0;i<n;++i)
-#define MAXN 100000
+#define MAXN 300000
 
 ll pa[MAXN];
 ll r[MAXN];
