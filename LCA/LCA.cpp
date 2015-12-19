@@ -1,4 +1,4 @@
-// Algorithm for finding the longest commom ancestor of two nodes in a tree
+// Algorithm for finding the lowest commom ancestor of two nodes in a tree
 // with O(N log N) preprocessing and O(log N) query time
 
 #include <bits/stdc++.h>
@@ -17,7 +17,9 @@ vector<ll> g[MAXN];
 //We use the array pa[i][j] for determining 
 //the 2^i. parent of the vertex j
 ll pa[LN][MAXN];
-ll depth[MAXN];//depth[i] stores the distance of the i. vertex from the root 
+
+//depth[i] stores the distance of the i. vertex from the root 
+ll depth[MAXN];
 
 //We initialize the pa and the depth array with a depth-first-search
 void dfs(ll v, ll parent, ll d){
