@@ -1,3 +1,4 @@
+//A simple depth-first search
 #include <bits/stdc++.h>
 
 #define ll long long
@@ -8,31 +9,27 @@
 
 using namespace std;
 
-vector<ll> g[MAXN];
 bool w[MAXN];
+void dfs(int v);
 
-void dfs(int v){
-	w[v]=true;
-
-	FOR(i,g[v].sz()){
-		if(w[g[v][i]]==false) dfs(g[v][i]);
-	}
-}
-
+vector<ll> g[MAXN];//Vectors storing our graph
 int main(void){
-	ll n,m; cin >> n >> m;
+	int n;//n - the number of vertexes in our graph
+	int m;//m - the number of edges in our graph
+	cin >> n >> m;
 
-	FOR(i,m){
+	for(int i=0;i<m;++i){
 		ll a,b;
-		cin >> a;
-		cin >> b;
-		a--; b--;
-		g[a].pb(b);
-		g[b].pb(a);
+		cin >> a; a--;
+		cin >> b; b--;
+
+		g[a].push_back(b);
+		g[b].push_back(a);
 	}
 
+	//let's make some fun - determine, how many
+	//components our graph has
 	ll comp=0;
-
 	FOR(i,n) if(w[i]==false){
 		dfs(i);
 		comp++;
@@ -41,4 +38,13 @@ int main(void){
 	cout<<comp<<endl;
 
 	return 0;
+}
+
+//The depth first search:
+void dfs(int v){
+	w[v]=true;
+
+	FOR(i,g[v].sz()){
+		if(w[g[v][i]]==false) dfs(g[v][i]);
+	}
 }
