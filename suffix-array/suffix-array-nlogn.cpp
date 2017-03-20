@@ -11,7 +11,7 @@ using namespace std;
 string S;
 int n;
 
-const int maxn = 300100;
+const int maxn = 1234567;
 const int alphabet = 256;
 
 int w[maxn], c[maxn], inv[maxn];
