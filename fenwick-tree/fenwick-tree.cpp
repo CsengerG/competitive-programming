@@ -4,6 +4,7 @@ using namespace std;
 
 const int size=100;
 int ft[size];
+int ft2D[size][size];
 
 int getsum(int i){
     int sum = 0;
@@ -28,5 +29,58 @@ void add(int i, int x){
     }
 }
 
+void add_2d(int I, int J, int x){
+	int i=I;
+	while(i<size){
+		int j=J;
+		while(j<size){
+			ft2D[i][j] += x;
+			j += j&-j;
+		}
+
+		i += i&-i;
+	}
+}
+
+int getsum_2d(int I, int J){
+	int sum = 0;
+	int i=I;
+
+	while(i>0){
+		int j = J;
+		while(j>0){
+			sum += ft2D[i][j];
+			j-=j&-j;
+		}
+		i-=i&-i;
+	}
+
+	return sum;
+}
+
 int main(void){
+	// TEST 1D
+	
+	// 0 0 0 0 0 0 0 0 0 0 ...
+	add(5,10);
+	add(7,20);
+	// 0 0 0 0 10 0 20 0 0 ...
+	cout << getsum(8) << endl; // supposed to be 30
+	cout << getsum(6) << endl; // supposed to be 10
+	cout << getsum(3) << endl; // supposed to be 0
+	cout << endl;
+	// TEST 2D
+
+	// 0 0 0
+	// 0 0 0
+	// 0 0 0
+	add_2d(2,2,10);
+	add_2d(3,3,10);
+	// 0 0 0
+	// 0 10 0
+	// 0 0 10
+	cout << getsum_2d(3,3) << endl; // supposed to be 20
+	cout << getsum_2d(2,2) << endl; // supposed to be 10;
+	cout << getsum_2d(2,3) << endl; // 10
+	cout << getsum_2d(1,2) << endl; // 0
 }
