@@ -31,6 +31,13 @@ struct point {
 	}
 };
 
+struct line { double a,b,c; };
+
+struct vec {
+	double x,y;
+	vec(double _x, double _y) : x(_x), y(_y) {}
+};
+
 // get the hypotenuse of a right-angled triangle
 double hypot(double dx, double dy){
 	return sqrt(dx*dx + dy*dy);
@@ -46,8 +53,6 @@ point rotate(point p, double theta){
 	double rad = DEG_TO_RAD(theta);
 	return point(p.x*cos(rad)-p.y*sin(rad),p.x*sin(rad)+p.y*cos(rad));
 }
-
-struct line { double a,b,c; };
 
 // get the equation of a line connecting p1 and p2
 void pointsToLine(point p1, point p2, line & l){
@@ -68,6 +73,38 @@ bool areParallel(line l1, line l2){
 
 bool areSame(line l1, line l2){
 	return (areParallel(l1,l2) && fabs(l1.c-l2.c)<EPS);
+}
+
+vec toVec(point a, point b){
+	return vec(b.x-a.x, b.y-a.y);
+}
+
+vec scale(vec v, double s){
+	return vec(v.x*s, v.y*s);
+}
+
+point translate(point p, vec v){
+	return point(p.x+v.x, p.y+v.y);
+}
+
+double dot(vec a, vec b){
+	return a.x*b.x+a.y*b.y;
+}
+
+double cross(vec a, vec b){
+	return a.x*b.y - a.y*b.x;
+}
+
+double norm_sq(vec v){
+	return v.x*v.x + v.y*v.y;
+}
+
+bool ccw(point p, point q, point r){
+	return cross(toVec(p,q),toVec(p,r)) > 0;
+}
+
+bool collinear(point p, point q, point r){
+	return fabs(cross(toVec(p,q),toVec(p,r))) < EPS;
 }
 
 int main(){
