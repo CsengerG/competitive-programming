@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 
+#define int long long 
 using namespace std;
 
 // our chosen polynomial modulo n and with varying constant
@@ -38,13 +39,14 @@ int pollard(int n){
 	return d;
 }
 
-int main(){
+main(){
+	// testing
 	srand( time(NULL) );
 
 	int N;
 	cin >> N;
 
-	while(N>1){
+	while(N>1){ // write out some divisors
 		int d = pollard(N);
 		cout << d << endl;
 		N = N/d;
