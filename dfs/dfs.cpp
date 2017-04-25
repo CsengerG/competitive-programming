@@ -43,8 +43,5 @@ int main(void){
 //The depth first search:
 void dfs(int v){
 	w[v]=true;
-
-	FOR(i,g[v].sz()){
-		if(w[g[v][i]]==false) dfs(g[v][i]);
-	}
+	FOR(i,g[v].sz()) if(!w[g[v][i]]) dfs(g[v][i]);
 }
