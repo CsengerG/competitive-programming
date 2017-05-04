@@ -15,6 +15,8 @@ int parent[maxn]; // parent
 int ch[maxn]; // represented character
 int failure[maxn];
 bool w[maxn];
+bool was[maxn];
+bool ans[maxn];
 
 vector<int> output[maxn]; // output function
 string s[maxn];
@@ -69,8 +71,6 @@ void compute_failure(){
 
             while(g[state][c] == FAIL) {
                 state = failure[state]; // traverse trie by suffix links
-                cout << "*" << endl;
-                cout << v << endl;
             }
 
             state = g[state][c]; // doesnt FAIL anymore, we can get the failure node
@@ -112,7 +112,6 @@ int main(){
 
     int state = 0;
     FOR(i,m.size()){
-        cout << "state: " << state << endl;
         char nextchar = m[i];
 
         if( g[state][nextchar] != FAIL ) state = g[state][nextchar-'A'];
@@ -121,9 +120,17 @@ int main(){
             state = g[state][nextchar-'A'];
         }
 
-        cout << "found strings:" << endl;
-        for(auto o: output[state]) cout << s[o] << " ";
-        cout << endl;
+        was[state]=true;
+    }
+
+    // print whether a string was found or not
+    FOR(i,sz){
+        if(was[i]) for(auto o:output[i]) ans[o] = true;
+    }
+
+    FOR(i,n) {
+        if( ans[i] ) cout << "Y" << endl;
+        else cout << "N" << endl;
     }
 
     return 0;
