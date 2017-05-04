@@ -53,7 +53,12 @@ int main(){
     // create root
     trie.push_back(Node());
 
-    addString("alma");
-    addString("korte");
-    addString("szilva");
+    addString("aaaa");
+    addString("aabcd");
+    addString("abcde");
+    addString("abcdf");
+
+    FOR(i,trie.size()){
+        cout << trie[i].c << " ";
+    }
 }
