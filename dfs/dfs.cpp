@@ -13,12 +13,12 @@ bool w[MAXN];
 void dfs(int v);
 
 vector<ll> g[MAXN];//Vectors storing our graph
-int main(void){
+int main(){
 	int n;//n - the number of vertexes in our graph
 	int m;//m - the number of edges in our graph
 	cin >> n >> m;
 
-	for(int i=0;i<m;++i){
+	for(int i=0;i<m;i++){
 		ll a,b;
 		cin >> a; a--;
 		cin >> b; b--;
